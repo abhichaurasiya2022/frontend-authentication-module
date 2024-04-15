@@ -1,1 +1,48 @@
-<p>login works!</p>
+<div class="login-container">
+    <h1>Login to MentorED</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <label for="email">
+            Email *
+        </label>
+        <input type="email" id="email" formControlName="email">
+        <div class="text-danger form-validation"
+            *ngIf="loginForm?.get('email')?.invalid && (loginForm?.get('email')?.dirty || loginForm?.get('email')?.touched)">
+            <span *ngIf="loginForm?.get('email')?.errors?.hasOwnProperty('required')">Email is required.</span>
+            <span *ngIf="loginForm?.get('email')?.errors?.hasOwnProperty('email')">Enter a valid email ID.</span>
+        </div>
+        <br>
+        <label for="password">
+            Password *
+        </label>
+        <input type="password" id="password" formControlName="password" required>
+        <div class="text-danger form-validation"
+            *ngIf="loginForm?.get('password')?.invalid && (loginForm?.get('password')?.dirty || loginForm?.get('password')?.touched)">
+            <span *ngIf="loginForm?.get('password')?.errors?.hasOwnProperty('required')">Enter new password.</span>
+            <span *ngIf="loginForm?.get('password')?.errors?.hasOwnProperty('minlength')">Please enter minimum 8
+                characters.</span>
+        </div>
+        <br>
+
+        <div>
+            <div class="text-danger form-validation"
+                *ngIf="loginForm?.get('robot')?.invalid && (loginForm?.get('robot')?.dirty || loginForm?.get('robot')?.touched)">
+                <span *ngIf="loginForm?.get('robot')?.errors?.hasOwnProperty('required')">Please check the 'I'm not a
+                    robot'
+                    box.</span>
+            </div>
+            <input type="checkbox" id="robot" formControlName="robot" required>
+            <label for="robot">
+                I'm not a robot
+            </label>
+
+        </div>
+        <br>
+        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+    <p>
+        <a href="#">Forgot password?</a>
+    </p>
+    <p>
+        Having trouble in logging in/signing up? <a href="mailto:support@shikshalokam.org">Write to us</a>
+    </p>
+</div>
